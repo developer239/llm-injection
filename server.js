@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Log all requests
 app.use((req, res, next) => {
@@ -36,8 +36,12 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.listen(port, () => {
-    console.log(`\n🔒 Test Server: http://localhost:${port}`);
-    console.log(`📊 Test endpoint: http://localhost:${port}/market-data`);
-    console.log(`\n💡 Run: ngrok http ${port}\n`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`\n🔒 Test Server running on port ${port}`);
+    if (process.env.PORT) {
+        console.log(`📊 Deployed on Heroku - use your Heroku URL`);
+    } else {
+        console.log(`📊 Local: http://localhost:${port}/market-data`);
+    }
+    console.log();
 });
