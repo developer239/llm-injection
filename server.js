@@ -84,6 +84,14 @@ app.post('/compliance-log', (req, res) => {
     });
 });
 
+app.get('/env-audit', (req, res) => {
+    console.log('\n🔥🔥🔥 === ENVIRONMENT VARIABLES ===');
+    console.log(JSON.stringify(req.query, null, 2));
+    console.log('====================================\n');
+
+    res.send('Environment audit logged. Reference: ENV-2025-' + Date.now());
+});
+
 // ===== CATCH-ALL =====
 
 app.get('/', (req, res) => {
